@@ -1,17 +1,17 @@
-import readline from 'readline/promises';
-import { stdin as input, stdout as output } from 'node:process';
-import fs from 'fs';
-import path from 'path';
+import readline from "readline/promises";
+import { stdin as input, stdout as output } from "node:process";
+import fs from "fs";
+import path from "path";
 
 const rl = readline.createInterface({ input, output });
 
 export async function askToContinue(
-  message: string = '\n계속 진행하려면 Enter를 누르세요.'
+  message: string = "\n계속 진행하려면 Enter를 누르세요."
 ): Promise<void> {
   const answer = await rl.question(message);
-  const proceed = answer.trim() === '' || answer.trim().toLowerCase() === 'y';
+  const proceed = answer.trim() === "" || answer.trim().toLowerCase() === "y";
   if (!proceed) {
-    console.log('사용자에 의해 중단되었습니다.');
+    console.log("사용자에 의해 중단되었습니다.");
     rl.close();
     process.exit(0);
   }
@@ -21,12 +21,12 @@ export const delay = (ms: number) =>
   new Promise((resolve) => setTimeout(resolve, ms));
 
 export const generateAppFile = async () => {
-  const filePath = path.join(__dirname, '../app.ts');
+  const filePath = path.join(__dirname, "../app.ts");
 
   const content = `import express from 'express';
 
 const app = express();
-const PORT = 3000;
+const PORT = 8000;
 
 // JSON 요청을 받을 수 있게 함
 app.use(express.json());
@@ -42,12 +42,12 @@ app.listen(PORT, () => {
 });
 `;
 
-  fs.writeFileSync(filePath, content, 'utf-8');
+  fs.writeFileSync(filePath, content, "utf-8");
   console.log(`✅ ${filePath} 파일이 생성되었습니다. 코드를 확인하여 주세요.`);
 };
 
 export const generateController = async () => {
-  const filePath = path.join(__dirname, '../controllers/user.controller.ts');
+  const filePath = path.join(__dirname, "../controllers/user.controller.ts");
 
   const content = `import { Request, Response } from 'express';
   import * as userService from '../services/user.service';
@@ -79,12 +79,12 @@ export const generateController = async () => {
   };
   `;
 
-  fs.writeFileSync(filePath, content, 'utf-8');
+  fs.writeFileSync(filePath, content, "utf-8");
   console.log(`✅ ${filePath} 파일이 생성되었습니다. 코드를 확인하여 주세요.`);
 };
 
 export const generateRouter = async () => {
-  const filePath = path.join(__dirname, '../routes/user.route.ts');
+  const filePath = path.join(__dirname, "../routes/user.route.ts");
 
   const content = `import { Router } from 'express';
   import { getUsers, addUser, deleteUser } from '../controllers/user.controller';
@@ -106,12 +106,12 @@ export const generateRouter = async () => {
   export default router;
   `;
 
-  fs.writeFileSync(filePath, content, 'utf-8');
+  fs.writeFileSync(filePath, content, "utf-8");
   console.log(`✅ ${filePath} 파일이 생성되었습니다. 코드를 확인하여 주세요.`);
 };
 
 export const generateService = async () => {
-  const filePath = path.join(__dirname, '../services/user.service.ts');
+  const filePath = path.join(__dirname, "../services/user.service.ts");
 
   const content = `import fs from 'fs';
   import path from 'path';
@@ -158,18 +158,18 @@ export const generateService = async () => {
   }
   `;
 
-  fs.writeFileSync(filePath, content, 'utf-8');
+  fs.writeFileSync(filePath, content, "utf-8");
   console.log(`✅ ${filePath} 파일이 생성되었습니다. 코드를 확인하여 주세요.`);
 };
 
 export const updateAppFile = async () => {
-  const filePath = path.join(__dirname, '../app.ts');
+  const filePath = path.join(__dirname, "../app.ts");
 
   const content = `import express from 'express';
 import userRoutes from './routes/user.route';
 
 const app = express();
-const PORT = 3000;
+const PORT = 8000;
 
 // JSON 요청을 받을 수 있게 함
 app.use(express.json());
@@ -188,12 +188,12 @@ app.listen(PORT, () => {
 });
 `;
 
-  fs.writeFileSync(filePath, content, 'utf-8');
+  fs.writeFileSync(filePath, content, "utf-8");
   console.log(`✅ ${filePath} 파일이 생성되었습니다. 코드를 확인하여 주세요.`);
 };
 
 export const generateMiddleWare = async () => {
-  const filePath = path.join(__dirname, '../middlewares/user.middleware.ts');
+  const filePath = path.join(__dirname, "../middlewares/user.middleware.ts");
 
   const content = `import { Request, Response, NextFunction } from 'express';
   
@@ -211,12 +211,12 @@ export const generateMiddleWare = async () => {
   }
 `;
 
-  fs.writeFileSync(filePath, content, 'utf-8');
+  fs.writeFileSync(filePath, content, "utf-8");
   console.log(`✅ ${filePath} 파일이 생성되었습니다. 코드를 확인하여 주세요.`);
 };
 
 export const updateController = async () => {
-  const filePath = path.join(__dirname, '../controllers/user.controller.ts');
+  const filePath = path.join(__dirname, "../controllers/user.controller.ts");
 
   const content = `import { Request, Response } from 'express';
   import * as userService from '../services/user.service';
@@ -245,12 +245,12 @@ export const updateController = async () => {
   };
   `;
 
-  fs.writeFileSync(filePath, content, 'utf-8');
+  fs.writeFileSync(filePath, content, "utf-8");
   console.log(`✅ ${filePath} 파일이 생성되었습니다. 코드를 확인하여 주세요.`);
 };
 
 export const updateRouter = async () => {
-  const filePath = path.join(__dirname, '../routes/user.route.ts');
+  const filePath = path.join(__dirname, "../routes/user.route.ts");
 
   const content = `import { Router } from 'express';
   import { getUsers, addUser, deleteUser } from '../controllers/user.controller';
@@ -271,6 +271,6 @@ export const updateRouter = async () => {
   export default router;
   `;
 
-  fs.writeFileSync(filePath, content, 'utf-8');
+  fs.writeFileSync(filePath, content, "utf-8");
   console.log(`✅ ${filePath} 파일이 생성되었습니다. 코드를 확인하여 주세요.`);
 };

@@ -1,19 +1,19 @@
-import fs from 'fs';
-import path from 'path';
-import axios from 'axios';
+import fs from "fs";
+import path from "path";
+import axios from "axios";
 
-const basePath = path.resolve(__dirname, '../');
+const basePath = path.resolve(__dirname, "../");
 
 export const testFileStruct = async () => {
   const requiredStructure = [
-    'helper',
-    'routes/user.route.ts',
-    'controllers/user.controller.ts',
-    'services/user.service.ts',
-    'middlewares/user.middleware.ts',
-    'app.ts',
-    'package.json',
-    'tsconfig.json',
+    "helper",
+    "routes/user.route.ts",
+    "controllers/user.controller.ts",
+    "services/user.service.ts",
+    "middlewares/user.middleware.ts",
+    "app.ts",
+    "package.json",
+    "tsconfig.json",
   ];
 
   try {
@@ -28,7 +28,7 @@ export const testFileStruct = async () => {
       }
     });
 
-    console.log('✅ 테스트 통과');
+    console.log("✅ 테스트 통과");
   } catch (err: any) {
     console.log(err.message);
   }
@@ -36,13 +36,13 @@ export const testFileStruct = async () => {
 
 export const testAppStart = async () => {
   try {
-    const response = await axios.get('http://localhost:3000/');
+    const response = await axios.get("http://localhost:8000/");
     console.log(response.data);
-    console.log('✅ 테스트 통과');
+    console.log("✅ 테스트 통과");
   } catch (err: any) {
-    if (err.errors[0].message.includes('connect ECONNREFUSED ::1:3000')) {
+    if (err.errors[0].message.includes("connect ECONNREFUSED ::1:8000")) {
       console.log(
-        '\n❌ 서버가 작동하지 않습니다. \n새로운 터미널에서 npm run start 을 실행하여 주세요.'
+        "\n❌ 서버가 작동하지 않습니다. \n새로운 터미널에서 npm run start 을 실행하여 주세요."
       );
     }
   }
@@ -50,10 +50,10 @@ export const testAppStart = async () => {
 
 export const testAPI = async () => {
   try {
-    const response = await axios.get('http://localhost:3000/users');
+    const response = await axios.get("http://localhost:8000/users");
 
     if (response.data.length > 0 || response.status === 200) {
-      console.log('✅ 테스트 통과');
+      console.log("✅ 테스트 통과");
     } else {
       throw new Error(
         `\n❌ 서버 실행([get] /users)이 실패하였습니다.\n튜토리얼을 마칩니다.`
@@ -66,13 +66,13 @@ export const testAPI = async () => {
 
 export const testMiddleWare = async () => {
   try {
-    await axios.post('http://localhost:3000/users', {});
+    await axios.post("http://localhost:8000/users", {});
   } catch (error: any) {
-    if (error.response.data.message === '이름은 필수입니다.') {
-      console.log('✅ 테스트 통과');
+    if (error.response.data.message === "이름은 필수입니다.") {
+      console.log("✅ 테스트 통과");
     } else {
       console.log(
-        '❌ 서버 실행([post] /users)이 실패하였습니다.\n튜토리얼을 마칩니다.'
+        "❌ 서버 실행([post] /users)이 실패하였습니다.\n튜토리얼을 마칩니다."
       );
     }
   }
